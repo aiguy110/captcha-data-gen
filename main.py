@@ -12,8 +12,9 @@ def gen_training_data(output_dir, num_samples):
 
     image_gen = ImageCaptcha()
     for n in range(num_samples):
+        captcha_length = random.choice(range(min_chars, max_chars+1))
         captcha_text = ''
-        for c in range(min_chars, max_chars+1):
+        for c in range(captcha_length):
             captcha_text += random.choice(char_set)
         
         gen_result = image_gen.generate_image(captcha_text, for_training=True)
@@ -42,7 +43,7 @@ def gen_training_data(output_dir, num_samples):
         
             label.append({'left':left, 'right': right, 'top': top, 'bottom':bottom})
         
-        with open(os.path.join(date_dir, f'{captcha_text}.json'), 'w') as f:
+        with open(os.path.join(output_dir, f'{captcha_text}.json'), 'w') as f:
             json.dump(label, f)
 
 

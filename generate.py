@@ -1,7 +1,8 @@
 from captcha.image import ImageCaptcha
 import random
-import json
 import string
+import json
+import sys
 import os
 
 
@@ -49,4 +50,9 @@ def gen_training_data(output_dir, num_samples):
 
 
 if __name__ == '__main__':
-    gen_training_data('data', 1)
+    if len(sys.argv) != 2:
+        print('Usage:')
+        print('python3 main.py <number_of_samples>')
+        
+    num_samples = int(sys.argv[1])
+    gen_training_data('data', num_samples)
